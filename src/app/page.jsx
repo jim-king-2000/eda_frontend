@@ -2,7 +2,7 @@
 
 import { Button } from '@nextui-org/react';
 import { useState } from 'react';
-import { Axis, Grid, LineSeries, XYChart } from '@visx/xychart';
+import { Axis, Grid, LineSeries, XYChart, Tooltip } from '@visx/xychart';
 
 async function ngspice(setChartData) {
 	const res = await fetch('/api', {
@@ -36,11 +36,29 @@ export default function Page() {
 					{chartData.map((datum, index) => (
 						<LineSeries
 							key={index}
-							dataKey='Line 1'
+							dataKey={`Line ${index}`}
 							data={datum}
 							{...accessors}
 						/>
 					))}
+					<Tooltip
+						snapTooltipToDatumX
+						snapTooltipToDatumY
+						showVerticalCrosshair
+						showSeriesGlyphs
+						renderTooltip={({ tooltipData, colorScale }) => (
+							<div>
+								<div
+									style={{ color: colorScale(tooltipData.nearestDatum.key) }}
+								>
+									{tooltipData.nearestDatum.key}
+								</div>
+								{accessors.xAccessor(tooltipData.nearestDatum.datum)}
+								{', '}
+								{accessors.yAccessor(tooltipData.nearestDatum.datum)}
+							</div>
+						)}
+					/>
 				</XYChart>
 			)}
 		</div>
