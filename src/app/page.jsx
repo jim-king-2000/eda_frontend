@@ -30,8 +30,8 @@ export default function Page() {
 					xScale={{ type: 'band' }}
 					yScale={{ type: 'linear' }}
 				>
-					<Axis orientation='bottom' />
-					<Axis orientation='left' />
+					<Axis orientation='bottom' label='Vds(V)' />
+					<Axis orientation='left' label='Ids(A)' />
 					<Grid columns={false} numTicks={4} />
 					{chartData.map((datum, index) => (
 						<LineSeries
