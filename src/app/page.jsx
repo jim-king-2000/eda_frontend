@@ -21,7 +21,6 @@ const accessors = {
 
 export default function Page() {
 	const [chartData, setChartData] = useState();
-	console.log(chartData);
 	return (
 		<div>
 			<Button onPress={() => ngspice(setChartData)}>Press me</Button>
