@@ -54,7 +54,7 @@ export default function Page() {
 	const [chartData, setChartData] = useState();
 	return (
 		<div>
-			<Button onPress={() => ngspice(setChartData)}>Press me</Button>
+			<Button onPress={() => ngspice(setChartData)}>Simulate</Button>
 			{chartData &&
 				chartData.map((datum, index) => <Chart key={index} data={datum} />)}
 		</div>
