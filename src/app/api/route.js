@@ -1,5 +1,5 @@
-export async function POST(request, { params }) {
-	const res = await fetch(`http://47.102.86.37:5000/${params.chart}`, {
+export async function POST(request) {
+	const res = await fetch(`http://47.102.86.37:5000/`, {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json',
