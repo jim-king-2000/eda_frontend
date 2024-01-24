@@ -12,6 +12,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@heroicons/react": "^2.1.1",
     "@nextui-org/react": "^2.2.9",
     "@visx/xychart": "^3.7.0",
     "framer-motion": "^11.0.2",
