@@ -6,7 +6,7 @@ import { Button } from '@nextui-org/react';
 import { Axis, Grid, LineSeries, XYChart, Tooltip } from '@visx/xychart';
 
 async function ngspice(setChartData) {
-	const res = await fetch('/api/idvd', {
+	const res = await fetch('/api', {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json',
