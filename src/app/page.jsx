@@ -33,7 +33,12 @@ export default function Page() {
 				maxValue={50}
 				step={0.001}
 			/>
-			<div>
+			<div
+				style={{
+					display: 'grid',
+					gridTemplateColumns: 'repeat(auto-fit, minmax(480px, 1fr))',
+				}}
+			>
 				{chartData &&
 					chartData.map((datum, index) => <Chart key={index} data={datum} />)}
 			</div>
