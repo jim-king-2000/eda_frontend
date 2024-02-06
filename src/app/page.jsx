@@ -1,8 +1,7 @@
 import { Home } from './pageClient';
 
-export const runtime = 'edge';
-
 async function getAllParams() {
+	console.log(`${process.env.FRONTEND_ORIGIN}/api/`);
 	const rep = await fetch(`${process.env.FRONTEND_ORIGIN}/api/`);
 	return rep.json();
 }
