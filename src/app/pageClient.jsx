@@ -1,7 +1,17 @@
 'use client';
 
 import { useState } from 'react';
-import { Button } from '@nextui-org/react';
+import {
+	Button,
+	Tabs,
+	Tab,
+	Table,
+	TableHeader,
+	TableColumn,
+	TableBody,
+	TableRow,
+	TableCell,
+} from '@nextui-org/react';
 import { Chart } from './components/chart';
 import { Adjustor } from './components/adjustor';
 
@@ -16,7 +26,7 @@ async function ngspice(params) {
 	return res.json();
 }
 
-export function Home() {
+export function Home({ params }) {
 	const [chartData, setChartData] = useState();
 	const [vth0, setVth0] = useState(0.5525229271354288);
 
@@ -34,6 +44,7 @@ export function Home() {
 				step={0.001}
 			/>
 			<div
+				className='flex-1'
 				style={{
 					display: 'grid',
 					gridTemplateColumns: 'repeat(auto-fit, minmax(480px, 1fr))',
@@ -41,6 +52,42 @@ export function Home() {
 			>
 				{chartData &&
 					chartData.map((datum, index) => <Chart key={index} data={datum} />)}
+			</div>
+			<div>
+				<Tabs fullWidth>
+					{Object.entries(params.paramClassify).map(([key, value]) => (
+						<Tab key={key} title={key}>
+							<Table selectionMode='multiple' classNames={{ base: 'h-96' }}>
+								<TableHeader>
+									<TableColumn>Name</TableColumn>
+									<TableColumn>Value</TableColumn>
+									<TableColumn>Lower</TableColumn>
+									<TableColumn>Upper</TableColumn>
+									<TableColumn>Step</TableColumn>
+								</TableHeader>
+								<TableBody>
+									{Object.entries(
+										value
+											.map((index) => params.defaultParams[index].params)
+											.reduce(
+												(accumulator, currentValue) =>
+													Object.assign(accumulator, currentValue),
+												{}
+											)
+									).map(([paramName, param]) => (
+										<TableRow key={paramName}>
+											<TableCell>{paramName}</TableCell>
+											<TableCell>{param.default}</TableCell>
+											<TableCell>{param.soft[0]}</TableCell>
+											<TableCell>{param.soft[1]}</TableCell>
+											<TableCell>{param.step}</TableCell>
+										</TableRow>
+									))}
+								</TableBody>
+							</Table>
+						</Tab>
+					))}
+				</Tabs>
 			</div>
 		</>
 	);

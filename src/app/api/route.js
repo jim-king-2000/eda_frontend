@@ -1,4 +1,4 @@
-const HOST = `http://${process.env.BACKEND_HOST}:5000/`;
+const HOST = `http://${process.env.BACKEND_HOST}/`;
 
 export async function POST(request) {
 	const res = await fetch(HOST, {
@@ -13,7 +13,7 @@ export async function POST(request) {
 	return Response.json(data);
 }
 
-export async function GET(request) {
+export async function GET() {
 	const res = await fetch(HOST);
 	const data = await res.json();
 	return Response.json(data);
