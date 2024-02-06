@@ -15,7 +15,6 @@ export async function POST(request) {
 
 export async function GET(request) {
 	const res = await fetch(HOST);
-
 	const data = await res.json();
 	return Response.json(data);
 }
