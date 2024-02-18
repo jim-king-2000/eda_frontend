@@ -23,17 +23,19 @@ export function Home({ params }) {
 
 	return (
 		<>
-			<Button onPress={async () => setChartData(await ngspice({ vth0 }))}>
-				Simulate
-			</Button>
-			<Adjustor
-				name='Vth0'
-				value={vth0}
-				onChange={(value) => setVth0(value)}
-				minValue={-50}
-				maxValue={50}
-				step={0.001}
-			/>
+			<div>
+				<Button onPress={async () => setChartData(await ngspice({ vth0 }))}>
+					Simulate
+				</Button>
+				<Adjustor
+					name='Vth0'
+					value={vth0}
+					onChange={(value) => setVth0(value)}
+					minValue={-50}
+					maxValue={50}
+					step={0.001}
+				/>
+			</div>
 			<div
 				className='flex-1'
 				style={{

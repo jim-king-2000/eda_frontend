@@ -11,20 +11,20 @@ import {
 	TableRow,
 	TableCell,
 } from '@nextui-org/react';
+import { Adjustor } from './adjustor';
 
-export function ParamWindow({ params }) {
-	const [selectedKeys, setSelectedKeys] = useState(new Set([]));
-
+function ParamTable({ params, selectedKeys, setSelectedKeys }) {
 	return (
-		<div>
-			<Tabs fullWidth>
+		<div className='flex-1 h-full flex flex-col'>
+			<Tabs fullWidth classNames={{ base: 'gap-2', panel: 'pb-0 flex-1' }}>
 				{Object.entries(params.paramClassify).map(([key, value]) => (
 					<Tab key={key} title={key}>
 						<Table
+							isHeaderSticky
+							classNames={{ base: 'h-96' }}
 							selectionMode='multiple'
 							selectedKeys={selectedKeys}
 							onSelectionChange={setSelectedKeys}
-							classNames={{ base: 'h-96' }}
 						>
 							<TableHeader>
 								<TableColumn>Name</TableColumn>
@@ -54,6 +54,47 @@ export function ParamWindow({ params }) {
 					</Tab>
 				))}
 			</Tabs>
+		</div>
+	);
+}
+
+function ParamAdjustors({ params, selectedKeys }) {
+	return (
+		<div className='flex-1 min-h-0 overflow-auto'>
+			<div
+				style={{
+					display: 'grid',
+					gridGap: '8px',
+					gridAutoRows: 'min-content',
+					gridTemplateColumns: 'repeat(auto-fit, minmax(12rem, 1fr))',
+				}}
+			>
+				{selectedKeys.map((key) => (
+					<Adjustor
+						name={key}
+						// value={vth0}
+						// onChange={(value) => setVth0(value)}
+						minValue={-50}
+						maxValue={50}
+						step={0.001}
+					/>
+				))}
+			</div>
+		</div>
+	);
+}
+
+export function ParamWindow({ params }) {
+	const [selectedKeys, setSelectedKeys] = useState(new Set([]));
+
+	return (
+		<div className='flex flex-row gap-2'>
+			<ParamTable
+				params={params}
+				selectedKeys={selectedKeys}
+				setSelectedKeys={setSelectedKeys}
+			/>
+			<ParamAdjustors params={params} selectedKeys={Array.from(selectedKeys)} />
 		</div>
 	);
 }
