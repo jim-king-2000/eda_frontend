@@ -62,10 +62,11 @@ function ParamTable({ params, selectedKeys, setSelectedKeys }) {
 }
 
 function ParamAdjustors({ params, selectedKeys }) {
+	console.log(selectedKeys);
 	return (
-		<div className='pb-2 h-full flex-1'>
+		<div className='pb-2 flex-1'>
 			<div
-				className='h-full overflow-auto'
+				className='pr-1 h-full overflow-auto'
 				style={{
 					display: 'grid',
 					gridGap: '8px',
@@ -92,7 +93,7 @@ export function ParamWindow({ params }) {
 	const [selectedKeys, setSelectedKeys] = useState(new Set([]));
 
 	return (
-		<div className='flex flex-row gap-2 h-96'>
+		<div className='flex flex-row gap-2 h-1/3'>
 			<ParamTable
 				params={params}
 				selectedKeys={selectedKeys}
