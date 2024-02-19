@@ -16,12 +16,15 @@ import { Adjustor } from './adjustor';
 function ParamTable({ params, selectedKeys, setSelectedKeys }) {
 	return (
 		<div className='flex-1 h-full flex flex-col'>
-			<Tabs fullWidth classNames={{ base: 'gap-2', panel: 'pb-0 flex-1' }}>
+			<Tabs
+				fullWidth
+				classNames={{ base: 'gap-2', panel: 'flex-1 overflow-auto' }}
+			>
 				{Object.entries(params.paramClassify).map(([key, value]) => (
 					<Tab key={key} title={key}>
 						<Table
 							isHeaderSticky
-							classNames={{ base: 'h-96' }}
+							classNames={{ base: 'h-full' }}
 							selectionMode='multiple'
 							selectedKeys={selectedKeys}
 							onSelectionChange={setSelectedKeys}
@@ -60,8 +63,9 @@ function ParamTable({ params, selectedKeys, setSelectedKeys }) {
 
 function ParamAdjustors({ params, selectedKeys }) {
 	return (
-		<div className='flex-1 min-h-0 overflow-auto'>
+		<div className='pb-2 h-full flex-1'>
 			<div
+				className='h-full overflow-auto'
 				style={{
 					display: 'grid',
 					gridGap: '8px',
@@ -88,7 +92,7 @@ export function ParamWindow({ params }) {
 	const [selectedKeys, setSelectedKeys] = useState(new Set([]));
 
 	return (
-		<div className='flex flex-row gap-2'>
+		<div className='flex flex-row gap-2 h-96'>
 			<ParamTable
 				params={params}
 				selectedKeys={selectedKeys}
