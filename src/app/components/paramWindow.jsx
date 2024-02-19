@@ -15,7 +15,7 @@ import { Adjustor } from './adjustor';
 
 function ParamTable({ params, selectedKeys, setSelectedKeys }) {
 	return (
-		<div className='flex-1 h-full flex flex-col'>
+		<div className='h-full flex flex-col'>
 			<Tabs
 				fullWidth
 				classNames={{ base: 'gap-2', panel: 'flex-1 overflow-auto' }}
@@ -62,7 +62,6 @@ function ParamTable({ params, selectedKeys, setSelectedKeys }) {
 }
 
 function ParamAdjustors({ params, selectedKeys }) {
-	console.log(selectedKeys);
 	return (
 		<div className='pb-2 flex-1'>
 			<div
