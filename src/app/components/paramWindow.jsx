@@ -17,13 +17,11 @@ import { Adjustor } from './adjustor';
 function ParamTable({ params, selectedKeys, setSelectedKeys }) {
 	return (
 		<div className='h-full flex flex-col'>
-			<Tabs
-				fullWidth
-				classNames={{ base: 'gap-2', panel: 'flex-1 overflow-auto' }}
-			>
+			<Tabs fullWidth classNames={{ panel: 'flex-1 overflow-auto' }}>
 				{Object.entries(params).map(([category, categoryParams]) => (
 					<Tab key={category} title={category}>
 						<Table
+							aria-label='Parameters Table'
 							isHeaderSticky
 							classNames={{ base: 'h-full' }}
 							selectionMode='multiple'

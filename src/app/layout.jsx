@@ -1,4 +1,5 @@
 import { Provider } from './provider';
+import './main.css';
 
 export default function RootLayout({ children }) {
 	return (

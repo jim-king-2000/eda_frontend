@@ -31,6 +31,7 @@ export function Adjustor({ name, minValue, maxValue, value, step, onChange }) {
 				</Button>
 			</div>
 			<Slider
+				aria-label='Parameter Adjustor'
 				size='sm'
 				hideValue
 				step={0.001}
