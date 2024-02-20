@@ -1,7 +1,9 @@
 import { Home } from './pageClient';
 
 async function getAllParams() {
-	const rep = await fetch(`${process.env.FRONTEND_ORIGIN}/api/`);
+	const rep = await fetch(`${process.env.FRONTEND_ORIGIN}/api/`, {
+		cache: 'no-cache',
+	});
 	return rep.json();
 }
 

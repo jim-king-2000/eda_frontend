@@ -87,12 +87,11 @@ function ParamAdjustors({ params, selectedKeys }) {
 
 export function ParamWindow({ params }) {
 	const [selectedKeys, setSelectedKeys] = useState(new Set([]));
-	const groupedParams = Object.groupBy(params, ({ category }) => category);
 
 	return (
 		<div className='flex flex-row gap-2 h-1/3'>
 			<ParamTable
-				params={groupedParams}
+				params={Object.groupBy(params, ({ category }) => category)}
 				selectedKeys={selectedKeys}
 				setSelectedKeys={setSelectedKeys}
 			/>
