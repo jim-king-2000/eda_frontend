@@ -91,7 +91,7 @@ export function ParamWindow({ params }) {
 	return (
 		<div className='flex flex-row gap-2 h-1/3'>
 			<ParamTable
-				params={Object.groupBy(params, ({ category }) => category)}
+				params={params && Object.groupBy(params, ({ category }) => category)}
 				selectedKeys={selectedKeys}
 				setSelectedKeys={setSelectedKeys}
 			/>
