@@ -1,4 +1,4 @@
-import groupBy from 'lodash/groupBy';
+import groupBy from 'lodash.groupby';
 import { Axis, Grid, LineSeries, XYChart, Tooltip } from '@visx/xychart';
 
 const accessors = {
