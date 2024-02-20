@@ -20,8 +20,8 @@ function ParamTable({ params, selectedKeys, setSelectedKeys }) {
 				fullWidth
 				classNames={{ base: 'gap-2', panel: 'flex-1 overflow-auto' }}
 			>
-				{Object.entries(params.paramClassify).map(([key, value]) => (
-					<Tab key={key} title={key}>
+				{Object.entries(params).map(([category, categoryParams]) => (
+					<Tab key={category} title={category}>
 						<Table
 							isHeaderSticky
 							classNames={{ base: 'h-full' }}
@@ -37,15 +37,9 @@ function ParamTable({ params, selectedKeys, setSelectedKeys }) {
 								<TableColumn>Step</TableColumn>
 							</TableHeader>
 							<TableBody>
-								{Object.entries(
-									value
-										.map((index) => params.defaultParams[index].params)
-										.reduce((accumulator, currentValue) =>
-											Object.assign(accumulator, currentValue)
-										)
-								).map(([paramName, param]) => (
-									<TableRow key={paramName}>
-										<TableCell>{paramName}</TableCell>
+								{categoryParams.map((param) => (
+									<TableRow key={param.name}>
+										<TableCell>{param.name}</TableCell>
 										<TableCell>{param.default}</TableCell>
 										<TableCell>{param.soft[0]}</TableCell>
 										<TableCell>{param.soft[1]}</TableCell>
@@ -62,6 +56,8 @@ function ParamTable({ params, selectedKeys, setSelectedKeys }) {
 }
 
 function ParamAdjustors({ params, selectedKeys }) {
+	const selectedParams = params.filter(({ name }) => selectedKeys.has(name));
+
 	return (
 		<div className='pb-2 flex-1'>
 			<div
@@ -73,14 +69,15 @@ function ParamAdjustors({ params, selectedKeys }) {
 					gridTemplateColumns: 'repeat(auto-fit, minmax(12rem, 1fr))',
 				}}
 			>
-				{selectedKeys.map((key) => (
+				{selectedParams.map((param) => (
 					<Adjustor
-						name={key}
-						// value={vth0}
+						key={param.name}
+						name={param.name}
+						value={param.default}
 						// onChange={(value) => setVth0(value)}
-						minValue={-50}
-						maxValue={50}
-						step={0.001}
+						minValue={param.soft[0]}
+						maxValue={param.soft[1]}
+						step={param.setp}
 					/>
 				))}
 			</div>
@@ -90,15 +87,16 @@ function ParamAdjustors({ params, selectedKeys }) {
 
 export function ParamWindow({ params }) {
 	const [selectedKeys, setSelectedKeys] = useState(new Set([]));
+	const groupedParams = Object.groupBy(params, ({ category }) => category);
 
 	return (
 		<div className='flex flex-row gap-2 h-1/3'>
 			<ParamTable
-				params={params}
+				params={groupedParams}
 				selectedKeys={selectedKeys}
 				setSelectedKeys={setSelectedKeys}
 			/>
-			<ParamAdjustors params={params} selectedKeys={Array.from(selectedKeys)} />
+			<ParamAdjustors params={params} selectedKeys={selectedKeys} />
 		</div>
 	);
 }
