@@ -28,7 +28,13 @@ function ParamTable({ params, selectedKeys, setSelectedKeys }) {
 							classNames={{ base: 'h-full' }}
 							selectionMode='multiple'
 							selectedKeys={selectedKeys}
-							onSelectionChange={setSelectedKeys}
+							onSelectionChange={(selection) =>
+								selection === 'all'
+									? setSelectedKeys(
+											new Set(categoryParams.map(({ name }) => name))
+									  )
+									: setSelectedKeys(selection)
+							}
 						>
 							<TableHeader>
 								<TableColumn>Name</TableColumn>
@@ -37,16 +43,16 @@ function ParamTable({ params, selectedKeys, setSelectedKeys }) {
 								<TableColumn>Upper</TableColumn>
 								<TableColumn>Step</TableColumn>
 							</TableHeader>
-							<TableBody>
-								{categoryParams.map((param) => (
-									<TableRow key={param.name}>
-										<TableCell>{param.name}</TableCell>
-										<TableCell>{param.default}</TableCell>
-										<TableCell>{param.soft[0]}</TableCell>
-										<TableCell>{param.soft[1]}</TableCell>
-										<TableCell>{param.step}</TableCell>
+							<TableBody items={categoryParams}>
+								{(item) => (
+									<TableRow key={item.name}>
+										<TableCell>{item.name}</TableCell>
+										<TableCell>{item.default}</TableCell>
+										<TableCell>{item.soft[0]}</TableCell>
+										<TableCell>{item.soft[1]}</TableCell>
+										<TableCell>{item.step}</TableCell>
 									</TableRow>
-								))}
+								)}
 							</TableBody>
 						</Table>
 					</Tab>
