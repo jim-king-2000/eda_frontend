@@ -1,5 +1,6 @@
 'use client';
 
+import groupBy from 'lodash.groupby';
 import { useState } from 'react';
 import {
 	Tabs,
@@ -86,13 +87,12 @@ function ParamAdjustors({ params, selectedKeys }) {
 }
 
 export function ParamWindow({ params }) {
-	console.log(params);
 	const [selectedKeys, setSelectedKeys] = useState(new Set([]));
 
 	return (
 		<div className='flex flex-row gap-2 h-1/3'>
 			<ParamTable
-				params={Object.groupBy(params, ({ category }) => category)}
+				params={groupBy(params, ({ category }) => category)}
 				selectedKeys={selectedKeys}
 				setSelectedKeys={setSelectedKeys}
 			/>
