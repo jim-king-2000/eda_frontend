@@ -1,13 +1,6 @@
-'use client';
-
-import { useState } from 'react';
 import { Adjustor } from '../adjustor';
 
-export function ParamAdjustorWindow({ selectedParams }) {
-	// console.log('selectedParams', selectedParams);
-	const [params, setParams] = useState({});
-	// console.log('params', params);
-
+export function ParamAdjustorWindow({ selectedParams, setSelectedParams }) {
 	return (
 		<div className='pb-2 flex-1'>
 			<div
@@ -19,17 +12,15 @@ export function ParamAdjustorWindow({ selectedParams }) {
 					gridTemplateColumns: 'repeat(auto-fit, minmax(12rem, 1fr))',
 				}}
 			>
-				{selectedParams.map((param) => (
+				{selectedParams.map((param, index) => (
 					<Adjustor
 						key={param.name}
 						name={param.name}
-						value={params[param.name] ?? param.default}
+						value={param.value ?? param.default}
 						onChange={(value) => {
-							console.log(value);
-							setParams({
-								...params,
-								[param.name]: value,
-							});
+							const updatedParams = [...selectedParams];
+							updatedParams[index]['value'] = value;
+							setSelectedParams(updatedParams);
 						}}
 						minValue={param.soft[0]}
 						maxValue={param.soft[1]}
