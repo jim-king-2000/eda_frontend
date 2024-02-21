@@ -1,7 +1,12 @@
+'use client';
+
+import { useState } from 'react';
 import { Adjustor } from '../adjustor';
 
-export function ParamAdjustorWindow({ params, selectedKeys }) {
-	const selectedParams = params.filter(({ name }) => selectedKeys.has(name));
+export function ParamAdjustorWindow({ selectedParams }) {
+	// console.log('selectedParams', selectedParams);
+	const [params, setParams] = useState({});
+	// console.log('params', params);
 
 	return (
 		<div className='pb-2 flex-1'>
@@ -18,11 +23,17 @@ export function ParamAdjustorWindow({ params, selectedKeys }) {
 					<Adjustor
 						key={param.name}
 						name={param.name}
-						value={param.default}
-						// onChange={(value) => setVth0(value)}
+						value={params[param.name] ?? param.default}
+						onChange={(value) => {
+							console.log(value);
+							setParams({
+								...params,
+								[param.name]: value,
+							});
+						}}
 						minValue={param.soft[0]}
 						maxValue={param.soft[1]}
-						step={param.setp}
+						step={param.step}
 					/>
 				))}
 			</div>

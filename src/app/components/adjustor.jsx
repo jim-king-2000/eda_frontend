@@ -34,7 +34,7 @@ export function Adjustor({ name, minValue, maxValue, value, step, onChange }) {
 				aria-label='Parameter Adjustor'
 				size='sm'
 				hideValue
-				step={0.001}
+				step={step}
 				maxValue={maxValue}
 				minValue={minValue}
 				value={value}

@@ -15,7 +15,9 @@ export function ParamWindow({ params }) {
 				selectedKeys={selectedKeys}
 				setSelectedKeys={setSelectedKeys}
 			/>
-			<ParamAdjustorWindow params={params} selectedKeys={selectedKeys} />
+			<ParamAdjustorWindow
+				selectedParams={params.filter(({ name }) => selectedKeys.has(name))}
+			/>
 		</div>
 	);
 }

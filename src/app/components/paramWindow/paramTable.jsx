@@ -16,8 +16,11 @@ export function ParamTable({ params, selectedKeys, setSelectedKeys }) {
 				{Object.entries(params).map(([category, categoryParams]) => (
 					<Tab key={category} title={category}>
 						<Table
-							aria-label='Parameters Table'
 							isHeaderSticky
+							aria-label='Parameters Table'
+							disabledKeys={categoryParams
+								.filter(({ soft }) => soft[0] === soft[1])
+								.map(({ name }) => name)}
 							classNames={{ base: 'h-full' }}
 							selectionMode='multiple'
 							selectedKeys={selectedKeys}
