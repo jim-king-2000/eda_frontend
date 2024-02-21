@@ -26,17 +26,25 @@ export function ParamTable({ params, selectedParams, setSelectedParams }) {
 								classNames={{ base: 'h-full' }}
 								selectionMode='multiple'
 								selectedKeys={selectedParams.map(({ name }) => name)}
-								onSelectionChange={(selection) =>
-									selection === 'all'
-										? setSelectedParams(
-												Array.from(
-													new Set([...selectedParams, ...categoryParams])
-												)
-										  )
-										: setSelectedParams(
-												params.filter(({ name }) => selection.has(name))
-										  )
-								}
+								onSelectionChange={(selection) => {
+									if (selection === 'all') {
+										setSelectedParams(
+											Array.from(
+												new Set([...selectedParams, ...categoryParams])
+											)
+										);
+									} else if (selection.size === 0) {
+										setSelectedParams(
+											selectedParams.filter(
+												(param) => param.category !== category
+											)
+										);
+									} else {
+										setSelectedParams(
+											params.filter(({ name }) => selection.has(name))
+										);
+									}
+								}}
 							>
 								<TableHeader>
 									<TableColumn>Name</TableColumn>
