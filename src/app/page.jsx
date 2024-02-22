@@ -11,7 +11,7 @@ export default async function Page() {
 	const params = await getAllParams();
 
 	return (
-		<div className='h-screen flex flex-col gap-4 p-2 pb-0'>
+		<div className='h-screen flex flex-col p-2 pb-0'>
 			<Home params={params} />
 		</div>
 	);
