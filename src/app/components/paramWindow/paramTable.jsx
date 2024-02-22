@@ -30,7 +30,12 @@ export function ParamTable({ params, selectedParams, setSelectedParams }) {
 									if (selection === 'all') {
 										setSelectedParams(
 											Array.from(
-												new Set([...selectedParams, ...categoryParams])
+												new Set([
+													...selectedParams,
+													...categoryParams.filter(
+														({ soft }) => soft[0] !== soft[1]
+													),
+												])
 											)
 										);
 									} else if (selection.size === 0) {
