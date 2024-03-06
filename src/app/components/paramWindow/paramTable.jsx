@@ -21,7 +21,7 @@ export function ParamTable({ params, selectedParams, setSelectedParams }) {
 								isHeaderSticky
 								aria-label='Parameters Table'
 								disabledKeys={categoryParams
-									.filter(({ soft }) => soft[0] === soft[1])
+									.filter(({ enabled }) => enabled === false)
 									.map(({ name }) => name)}
 								classNames={{ base: 'h-full' }}
 								selectionMode='multiple'
